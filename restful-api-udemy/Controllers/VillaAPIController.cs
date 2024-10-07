@@ -1,9 +1,11 @@
-﻿using MagicVilla_VillaAPI.Data;
+﻿using AutoMapper;
 using MagicVilla_VillaAPI.Models;
 using MagicVilla_VillaAPI.Models.Dto;
+using MagicVilla_VillaAPI.Repository;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -13,18 +15,25 @@ namespace MagicVilla_VillaAPI.Controllers
     [ApiController]
     public class VillaAPIController : ControllerBase
     {
-        private readonly ApplicationDbContext _dbContext;
+        protected APIResponse _response;
+        private readonly IVillaRepository _villaRepository;
+        private readonly IMapper _mapper;
 
-        public VillaAPIController(ApplicationDbContext dbContext)
+        public VillaAPIController(IVillaRepository repository, IMapper mapper)
         {
-            this._dbContext = dbContext;
+            this._villaRepository = repository;
+            this._mapper = mapper;
+            this._response = new ();
         }
         // GET: api/values 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<IEnumerable<VillaDTO>> Get()
+        public async Task<ActionResult<APIResponse>> GetVillas()
         {
-            return Ok(_dbContext.Villas.ToList());
+            var villaList = await _villaRepository.GetAllAsync();
+            _response.Result = _mapper.Map<List<VillaDTO>>(villaList);
+            _response.Status = HttpStatusCode.OK;
+            return Ok(_response);
         }
 
         // GET api/values/5
@@ -39,12 +48,14 @@ namespace MagicVilla_VillaAPI.Controllers
                 return BadRequest();
             }
 
-            var villa = await _dbContext.Villas.FirstOrDefaultAsync(u => u.Id == id);
+            var villa = await _villaRepository.GetAsync(u => u.Id == id);
 
             if (villa == null)
             {
                 return NotFound();
             }
+            _response.Result = villa;
+            _response.Status = HttpStatusCode.OK;
 
             return Ok(villa); 
         }
