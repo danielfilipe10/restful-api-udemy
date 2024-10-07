@@ -77,7 +77,7 @@ namespace MagicVilla_VillaAPI.Controllers
                 Details = villaDTO.Details,
                 Name = villaDTO.Name,
                 Amenity = villaDTO.Amenity,
-                ImageURL = villaDTO.ImageURL,
+                ImageUrl = villaDTO.ImageUrl,
                 Occupancy = villaDTO.Occupancy,
                 Sqft = villaDTO.Sqft,
                 Rate = villaDTO.Rate
@@ -105,7 +105,7 @@ namespace MagicVilla_VillaAPI.Controllers
                 Details = villaDTO.Details,
                 Name = villaDTO.Name,
                 Amenity = villaDTO.Amenity,
-                ImageURL = villaDTO.ImageURL,
+                ImageUrl = villaDTO.ImageUrl,
                 Occupancy = villaDTO.Occupancy,
                 Sqft = villaDTO.Sqft,
                 Rate = villaDTO.Rate
@@ -142,7 +142,7 @@ namespace MagicVilla_VillaAPI.Controllers
                 Details = villa.Details,
                 Name = villa.Name,
                 Amenity = villa.Amenity,
-                ImageURL = villa.ImageURL,
+                ImageUrl = villa.ImageUrl,
                 Occupancy = villa.Occupancy,
                 Sqft = villa.Sqft,
                 Rate = villa.Rate
@@ -156,7 +156,7 @@ namespace MagicVilla_VillaAPI.Controllers
                 Details = villaDTO.Details,
                 Name = villaDTO.Name,
                 Amenity = villaDTO.Amenity,
-                ImageURL = villaDTO.ImageURL,
+                ImageUrl = villaDTO.ImageUrl,
                 Occupancy = villaDTO.Occupancy,
                 Sqft = villaDTO.Sqft,
                 Rate = villaDTO.Rate
