@@ -8,8 +8,8 @@ namespace MagicVilla_VillaAPI.Repository
         Task CreateAsync(T Entity);
         Task DeleteAsync(T Entity);
         Task SaveAsync();
-        Task<List<T>> GetAllAsync(Expression<Func<T, bool>>? filter = null);
-        Task<T> GetAsync(Expression<Func<T, bool>>? filter = null, bool tracked = true);
+        Task<List<T>> GetAllAsync(Expression<Func<T, bool>>? filter = null, string? includeProperties = null);
+        Task<T> GetAsync(Expression<Func<T, bool>>? filter = null, bool tracked = true, string? includeProperties = null);
 
     }
 }
